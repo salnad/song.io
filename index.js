@@ -11,29 +11,43 @@ app.listen(3000, () => {
   console.log("Server started");
 });
 
-app.get("/token", (req, res) => {
-  let authOptions = {
-    method: "post",
-    url: "https://accounts.spotify.com/api/token",
-    headers: {
-      Authorization:
-        "Basic " +
-        new Buffera.alloc(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
-    },
-    form: {
-      grant_type: "client_credentials",
-    },
-    json: true,
-  };
+app.get("/token", async (req, res) => {
+  // TODO: @salnad Buffer() is deprecated
+  let buffer = new Buffer(CLIENT_ID + ":" + CLIENT_SECRET);
+  let authorization = buffer.toString("base64");
 
-  // Send a POST request
-  console.log(axios(authOptions));
+  // let authOptions = {
+  //   method: "post",
+  //   url: "https://accounts.spotify.com/api/token",
+  //   form: {
+  //     grant_type: "client_credentials",
+  //   },
+  //   json: true,
+  // };
 
-  axios.post(authOptions, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      var token = body.access_token;
-      console.log(token);
-    }
-  });
+  // // Send a POST request
+  axios
+    .post(
+      "https://accounts.spotify.com/api/token",
+      "grant_type=client_credentials",
+      {
+        headers: {
+          Authorization: "Basic " + authorization,
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log("OH NOES!!!");
+    });
+
+  // axios.post(authOptions, function (error, response, body) {
+  //   if (!error && response.statusCode === 200) {
+  //     var token = body.access_token;
+  //     console.log(token);
+  //   }
+  // });
   res.send("HELLO WORLD!");
 });
