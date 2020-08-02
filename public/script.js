@@ -3,13 +3,15 @@ async function act() {
   let playlist_id = parse_playlist_for_id(playlist);
   let res = await fetch(`/playlist?playlist_id=${playlist_id}`);
   let simplified_playlist = await res.json();
+  simplified_playlist = simplified_playlist.filter((track) => {
+    return track.thirty_second_url != null;
+  });
   let random_track =
     simplified_playlist[Math.floor(Math.random() * simplified_playlist.length)];
   let audio_src = random_track.thirty_second_url;
   var audio = new Audio(audio_src);
   audio.play();
   document.getElementById("current-song").innerText = random_track.track_title;
-  console.log(simplified_playlist);
 }
 
 function parse_playlist_for_id(playlist) {

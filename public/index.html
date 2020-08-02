@@ -2,11 +2,19 @@
     <head>
         <script src="spotify-web-api.js"></script>
         <script src="script.js"></script>
-        <head>Spotify Guessing Game</head>
+        <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <input id="playlist-input" type="text"></input>
-        <button onclick="act()">CLICK</button>
-        <p id="current-song"></p>
+      <div class="container">
+        <div class="container-items" id="create-room-form">
+          <input id="user-name-create" type="text"></input>
+          <button onclick="">create room</button>  
+        </div>
+        <div class="container-items" id="join-room-form">
+          <input id="user-name-join" type="text"></input>
+          <input id="room-id-join" type="text"></input>
+          <button onclick="">join room</button>  
+        </div>
+      </div>
     </body>
 </html>
