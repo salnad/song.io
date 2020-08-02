@@ -32,7 +32,7 @@ app.get("/playlist", async (req, res) => {
     );
     let access_token = access_token_response.data.access_token;
     let spotify_data = await get_playlist_items(access_token, playlist_id);
-    res.send(spotify_data);
+    res.json(spotify_data);
   } catch (err) {
     console.log(`/token post usage error: ${err}`);
   }
