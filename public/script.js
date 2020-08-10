@@ -1,3 +1,18 @@
+async function createUser() {
+  let usernameInput = document.getElementById("user-name-create");
+  let username = usernameInput.value;
+  data = {
+    username,
+  };
+  await fetch("/createuser", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
 async function act() {
   let playlist = document.getElementById("playlist-input").value;
   let playlist_id = parse_playlist_for_id(playlist);
