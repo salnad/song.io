@@ -1,7 +1,27 @@
 const express = require("express");
 const axios = require("axios");
 const SpotifyWebApi = require("spotify-web-api-node");
-const mongodb = require("mongodb");
+const mongoose = require("mongoose");
+const { Int32 } = require("mongodb");
+mongoose.connect(
+  "mongodb+srv://test:12345@cluster0.wcn2l.mongodb.net/sample_airbnb?retryWrites=true&w=majority",
+  { useNewUrlParser: true }
+);
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+//Define a schema
+var Schema = mongoose.Schema;
+
+var SomeModelSchema = new Schema({
+  name: String,
+  age: Number,
+});
+
+var SomeModel = mongoose.model("SomeModel", SomeModelSchema);
 
 const CLIENT_ID = "907a3b6dfb7144029e11aa5ac4b68bbf";
 const CLIENT_SECRET = "1a603f6afd374387aa6c3f5bf97882ff";
