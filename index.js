@@ -1,4 +1,5 @@
 const express = require("express");
+
 const axios = require("axios");
 const SpotifyWebApi = require("spotify-web-api-node");
 const mongoose = require("mongoose");
@@ -17,31 +18,27 @@ let db = mongoose.connection;
 // start up db connection
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-// move to different model
-var Schema = mongoose.Schema;
-var userSchema = new Schema({
-  username: String,
-});
-var userModel = mongoose.model("users", userSchema);
-
-const CLIENT_ID = "907a3b6dfb7144029e11aa5ac4b68bbf";
-const CLIENT_SECRET = "1a603f6afd374387aa6c3f5bf97882ff";
+let userRouter = require("./routes/user");
+let roomRouter = require("./routes/room");
 
 const app = express();
+
+// // INCLUDE CLIENT FILES
 app.use(express.static("public"));
+
+// // INCLUDE MIDDLE WARE
 app.use(express.json());
+
+// // INCLUDE ROUTES
+app.use("/user", userRouter);
+app.use("/room", roomRouter);
 
 app.listen(3000, () => {
   console.log("Server started");
 });
 
-app.post("/createuser", (req, res) => {
-  let username = req.body.username;
-  let newUser = new userModel({ username });
-  newUser.save(function (err) {
-    if (err) return handleError(err);
-  });
-});
+const CLIENT_ID = "907a3b6dfb7144029e11aa5ac4b68bbf";
+const CLIENT_SECRET = "1a603f6afd374387aa6c3f5bf97882ff";
 
 app.get("/playlist", async (req, res) => {
   // TODO: @salnad Buffer() is deprecated

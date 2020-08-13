@@ -1,16 +1,31 @@
-async function createUser() {
+async function createRoom() {
   let usernameInput = document.getElementById("user-name-create");
   let username = usernameInput.value;
+  await createUser(username);
+  // data = {
+  //   username,
+  // };
+  await fetch("/room", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: "",
+  });
+}
+
+async function createUser(username) {
   data = {
     username,
   };
-  await fetch("/createuser", {
+  let response = await fetch("/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
+  console.log(response);
 }
 
 async function act() {
