@@ -1,9 +1,5 @@
 const express = require("express");
 
-const axios = require("axios");
-const SpotifyWebApi = require("spotify-web-api-node");
-const mongoose = require("mongoose");
-
 const DATABASE = "game-data";
 const USER = "test";
 const PASSWORD = "12345";

@@ -1,6 +1,10 @@
 const CLIENT_ID = "907a3b6dfb7144029e11aa5ac4b68bbf";
 const CLIENT_SECRET = "1a603f6afd374387aa6c3f5bf97882ff";
 
+const axios = require("axios");
+const SpotifyWebApi = require("spotify-web-api-node");
+const mongoose = require("mongoose");
+
 app.get("/playlist", async (req, res) => {
   // TODO: @salnad Buffer() is deprecated
   let buffer = new Buffer(CLIENT_ID + ":" + CLIENT_SECRET);
