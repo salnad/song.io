@@ -2,15 +2,12 @@ async function createRoom() {
   let usernameInput = document.getElementById("user-name-create");
   let username = usernameInput.value;
   await createUser(username);
-  // data = {
-  //   username,
-  // };
   await fetch("/room", {
+    credentials: "include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: "",
   });
 }
 
