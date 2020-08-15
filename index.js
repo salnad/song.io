@@ -1,4 +1,6 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 const DATABASE = "game-data";
 const USER = "test";
@@ -19,11 +21,12 @@ let roomRouter = require("./routes/room");
 
 const app = express();
 
-// // INCLUDE CLIENT FILES
-app.use(express.static("public"));
-
 // // INCLUDE MIDDLE WARE
 app.use(express.json());
+app.use(cookieParser());
+
+// // INCLUDE CLIENT FILES
+app.use(express.static("public"));
 
 // // INCLUDE ROUTES
 app.use("/user", userRouter);

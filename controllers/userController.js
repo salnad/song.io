@@ -8,4 +8,14 @@ exports.createUser = function (req, res) {
     // TODO: @salnad, add a "handle error"
     if (err) console.log(`error in creating user: ${err}`);
   });
+  res
+    .writeHead(200, {
+      "Set-Cookie": `userId=${newUser._id}; HttpOnly`,
+      "Access-Control-Allow-Credentials": "true",
+    })
+    .send();
+};
+
+exports.testCookie = function (req, res) {
+  res.send(`user with id ${userId} has made request`);
 };
