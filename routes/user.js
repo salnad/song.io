@@ -8,6 +8,5 @@ let userController = require("../controllers/userController");
 
 // POST request for creating a user
 router.post("/", userController.createUser);
-router.get("/", userController.testCookie);
 
 module.exports = router;
